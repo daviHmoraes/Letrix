@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,8 +15,15 @@ public class LetrixGame {
 
 		List<String> dicionario = carregarPalavras("dicionario.txt");
 		List<String> palavrasSecretas = carregarPalavras("dicionario.txt");
+		ArrayList<String> letrasNaoUsadas = new ArrayList<>();
+		
+        Collections.addAll(letrasNaoUsadas,
+                "A","B","C","D","E","F","G","H","I","J","K","L","M",
+                "N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
+            );
 		
 		String palavraSecreta = "CASAS";
+		
 		if(!palavrasSecretas.isEmpty()) { 
 			Random random = new Random();
 			palavraSecreta = palavrasSecretas.get(random.nextInt(palavrasSecretas.size()));
@@ -25,13 +33,32 @@ public class LetrixGame {
 		String tentativa;
 		boolean venceu = false; // Variavel de vitoria
 
-		System.out.println("+----------+");
-		System.out.println("|  Letrix  |");
-		System.out.print("+----------+");
+		System.out.println("+---------------+");
+		System.out.println("|    Letrix     |");
+		System.out.println("+---------------+");
+		System.out.println("|    Insira     |");
+		System.out.println("|      1        |");
+		System.out.println("|  Para ver as  |");
+		System.out.println("|  letras não   |");
+		System.out.println("|    usadas     |");
+		System.out.print("+---------------+");
 
 		for (int i = 1; i <= 6; i++) {
 			System.out.print("\nEscreva uma palavra com 5 letras(Restam " + (6-i) + " tentativas): ");
 			tentativa = input.nextLine().toUpperCase();
+			
+			if (tentativa.equals("1")) {
+				
+				System.out.println("\n +--Letras--+");
+				
+				for (String letra : letrasNaoUsadas) {
+					System.out.print(letra + ", ");
+				}
+				
+				System.out.println("\n+----Fim----+");
+				
+			}
+			
 			
 			if (tentativa.equals(admMasterSilvaJr)) {
 				System.out.println("+------------------------+");
@@ -45,6 +72,18 @@ public class LetrixGame {
 				System.out.println("A palavra deve conter exatamente 5 letras!");
 				System.out.print("Escreva uma palavra com 5 letras(Restam " + (6-i) + " tentativas): ");
 				tentativa = input.nextLine().toUpperCase();
+				
+				if (tentativa.equals("1")) {
+					
+					System.out.println("\n +--Letras--+");
+					
+					for (String letra : letrasNaoUsadas) {
+						System.out.print(letra + ", ");
+					}
+					
+					System.out.println("\n+----Fim----+");
+					
+				}
 				
 				if (tentativa.equals(admMasterSilvaJr)) {
 					System.out.println("+------------------------+");
@@ -61,6 +100,18 @@ public class LetrixGame {
 				System.out.print("Escreva uma palavra com 5 letras(Restam " + (6-i) + " tentativas): ");
 				tentativa = input.nextLine().toUpperCase();
 				
+				if (tentativa.equals("1")) {
+					
+					System.out.println("\n +--Letras--+");
+					
+					for (String letra : letrasNaoUsadas) {
+						System.out.print(letra + ", ");
+					}
+					
+					System.out.println("\n+----Fim----+");
+					
+				}
+				
 				if (tentativa.equals(admMasterSilvaJr)) {
 					System.out.println("+------------------------+");
 					System.out.println("| 🥶 Modo adm ativado 🥵  |");
@@ -74,6 +125,18 @@ public class LetrixGame {
 					System.out.println("A palavra deve conter exatamente 5 letras!");
 					System.out.print("Escreva uma palavra com 5 letras(Restam " + (6-i) + " tentativas): ");
 					tentativa = input.nextLine().toUpperCase();
+					
+					if (tentativa.equals("1")) {
+						
+						System.out.println("\n +--Letras--+");
+						
+						for (String letra : letrasNaoUsadas) {
+							System.out.print(letra + ", ");
+						}
+						
+						System.out.println("\n+----Fim----+");
+						
+					}
 					
 					if (tentativa.equals(admMasterSilvaJr)) {
 						System.out.println("+------------------------+");
@@ -94,7 +157,19 @@ public class LetrixGame {
 				System.out.println("+------------------------+");
 			}
 			
-			processador.verificarPalpite(tentativa, palavraSecreta);
+			if (tentativa.equals("1")) {
+				
+				System.out.println("\n +--Letras--+");
+				
+				for (String letra : letrasNaoUsadas) {
+					System.out.print(letra + ", ");
+				}
+				
+				System.out.println("\n+----Fim----+");
+				
+			}
+			
+			processador.verificarPalpite(tentativa, palavraSecreta, letrasNaoUsadas);
 
 			if (tentativa.equals(palavraSecreta)) {
 				venceu = true;
